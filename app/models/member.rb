@@ -12,4 +12,7 @@ class Member
   field :postcode, type: String
   field :email_allowed, type: Boolean
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
