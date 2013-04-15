@@ -1,33 +1,43 @@
 <%= form_for(@member) do |f| %>
   <% if @member.errors.any? %>
-    <div id="error_explanation">
+    <div id="alert alert-error">
       <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
 
       <ul>
-      <% @member.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @member.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :membership_number %><br />
-    <%= f.number_field :membership_number %>
-  </div>
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+  <div class="row-fluid">
+    <div class="span3">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      <%= f.label :phone %>
+      <%= f.text_field :phone %>
+    </div>
+    <div class="span3">
+      <%= f.label :address %>
+      <%= f.text_field :address_one %>
+      <%= f.text_field :address_two %>
+      <%= f.text_field :address_three %>
+      <%= f.label :postcode %>
+      <%= f.text_field :postcode %>
+      <br />
+      <%= f.label :email_allowed, class: "checkbox" do %>
+        <%= f.check_box :email_allowed %> Email allowed?
+      <% end %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", '/', class: "btn" %>
   </div>
+</div>
 <% end %>

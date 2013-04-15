@@ -19,28 +19,31 @@
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <a class="brand" href="#">
-          Wharf Chambers Co-operative Club
-        </a>
-      </div>
-    </div>
-      <div class="row-fluid">
-        <div class="span9">
-          <!--Body content-->
-          <%= yield %>
-        </div>
-        <!--Sidebar content-->
-        <div class="span3 hidden-phone">
+        <div class="container">
+          <a class="brand" href="#">
+            Wharf Chambers <em>Co-operative Club</em>
+          </a>
         </div>
       </div>
     </div>
+    <div id="main-content" class="container">
+    <div class="row-fluid">
+      <div class="span12">
+        <!--Body content-->
+        <%= yield %>
+      </div>
+      <!--Sidebar content-->
+      <div class="span3 hidden-phone">
+      </div>
+    </div>
+  </div>
 
-  </div> <!-- /container -->
+</div> <!-- /container -->
 
-  <!-- Javascripts
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <%= javascript_include_tag "application" %>
+<!-- Javascripts
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<%= javascript_include_tag "application" %>
 
 </body>
 </html>
