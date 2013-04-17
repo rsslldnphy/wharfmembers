@@ -26,24 +26,52 @@
         </div>
       </div>
     </div>
-    <div id="main-content" class="container">
-    <div class="row-fluid">
-      <div class="span12">
-        <!--Body content-->
-        <%= yield %>
-      </div>
-      <!--Sidebar content-->
-      <div class="span3 hidden-phone">
+
+    <div class="nav-wrapper">
+      <div class="container">
+        <ul class="nav nav-tabs">
+          <li class="dropdown">
+            <a class="dropdown-toggle"
+              data-toggle="dropdown"
+              href="#">
+              Members
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to "New", new_member_path %>
+              </li>
+              <li>
+                <%= link_to "List", members_path %>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
+    <div id="main-content" class="container">
+      <%= form_tag members_path, method: 'get', class: 'navbar-search pull-right' do %>
+        <%= text_field_tag :search, params[:search], class: 'search-query', placeholder: 'Search' %>
+        <%= button_tag "Search", type: 'submit', class: 'btn btn-primary' %>
+        <%= link_to "Clear", "/", class: 'btn' %>
+      <% end %>
+      <div class="row-fluid">
+        <div class="span12">
+          <!--Body content-->
+          <%= yield %>
+        </div>
+        <!--Sidebar content-->
+        <div class="span3 hidden-phone">
+        </div>
+      </div>
+    </div>
 
-</div> <!-- /container -->
+  </div> <!-- /container -->
 
-<!-- Javascripts
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<%= javascript_include_tag "application" %>
+  <!-- Javascripts
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <%= javascript_include_tag "application" %>
 
 </body>
 </html>

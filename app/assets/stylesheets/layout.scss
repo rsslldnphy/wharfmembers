@@ -3,7 +3,7 @@ body {
 }
 
 #main-content {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 h1 {
@@ -20,4 +20,15 @@ td {
   i {
     margin: 0px 5px;
   }
+}
+
+.nav-wrapper {
+  margin: 40px -10px 0px -10px;
+  background: #fcfcfc;
+  border-bottom: 1px solid #efefef;
+}
+
+.nav-tabs {
+  margin: 0px -10px;
+  border-bottom: 0px;
 }
