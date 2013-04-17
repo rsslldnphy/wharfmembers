@@ -8,6 +8,7 @@ gem 'rails', '3.2.11'
 gem "mongo", "~> 1.8.2"
 gem "bson_ext", "~> 1.8.2"
 gem "mongoid", "~> 3.0.22"
+gem 'mongoid_search', "~> 0.3.1"
 
 # Gems used only for assets and not required
 # in production environments by default.

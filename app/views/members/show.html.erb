@@ -1,25 +1,57 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Membership number:</b>
-  <%= @member.membership_number %>
-</p>
-
-<p>
-  <b>First name:</b>
-  <%= @member.first_name %>
-</p>
-
-<p>
-  <b>Last name:</b>
-  <%= @member.last_name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @member.email %>
-</p>
-
-
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<h1>Member Details</h1>
+<div class="row-fluid">
+  <div class="span6">
+    <table class="table table-bordered table-striped">
+      <tr>
+        <td>
+          <strong>Membership No.</strong>
+        </td>
+        <td>
+          <%= @member.membership_number %>
+          <span class="pull-right">
+            <%= link_to edit_member_path(@member) do %>
+              <i class="icon-pencil"></i>
+            <% end %>
+            <%= link_to @member, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <i class="icon-trash"></i>
+            <% end %>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Name</strong>
+        </td>
+        <td>
+          <%= @member.full_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Email</strong>
+        </td>
+        <td>
+          <%= @member.email %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Phone</strong>
+        </td>
+        <td>
+          <%= @member.phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Address</strong>
+        </td>
+        <td>
+          <% @member.address.each do |line| %>
+            <%= line %><br />
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
