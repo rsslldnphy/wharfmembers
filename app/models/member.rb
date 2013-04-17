@@ -14,6 +14,11 @@ class Member
   field :email_allowed, type: Boolean
 
   validates_presence_of :first_name, :last_name
+  validates_uniqueness_of :membership_number
+
+  before_create do
+    self.membership_number = Sequence.next("membership_number")
+  end
 
   search_in *[
     :first_name,
