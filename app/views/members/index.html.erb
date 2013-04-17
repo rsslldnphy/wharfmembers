@@ -1,6 +1,6 @@
 <h1>Members</h1>
 
-
+<%= paginate @members %>
 <table class="table table-striped table-bordered">
 
   <col width="10%" />
@@ -38,3 +38,7 @@
     </tr>
   <% end %>
 </table>
+
+<div class="pull-right">
+  <%= paginate @members %>
+</div>

@@ -29,6 +29,10 @@ class Member
     :post_code
   ]
 
+  def self.search(text, allow_empty_search=true)
+    full_text_search(text, allow_empty_search: allow_empty_search)
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

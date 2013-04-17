@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.full_text_search(params[:search], allow_empty_search: true)
+    @members = Member.search(params[:search]).page(params[:page]).per(10)
 
     respond_to do |format|
       format.html # index.html.erb
