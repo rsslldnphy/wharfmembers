@@ -11,7 +11,7 @@ class Member
   field :address_two, type: String
   field :address_three, type: String
   field :postcode, type: String
-  field :email_allowed, type: Boolean
+  field :email_allowed, type: Boolean, default: true
 
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :membership_number
