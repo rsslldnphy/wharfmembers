@@ -67,23 +67,25 @@
       <thead>
         <tr><th>Membership Status: <%= membership_status @member %></th></tr>
       </thead>
-      <% @member.memberships.reverse.each do |membership| %>
-        <tr>
-          <td>
-            <strong><%= membership.year %></strong>
-            <em>(registered on <%= membership.created_at.strftime("%d-%m-%Y") %>)</em>
-            <%= link_to [@member, membership], method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
-              <i class="icon-trash"></i>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
       <tbody>
-        <tr>
-          <td class="actions">
-            <%= member_actions @member %>
-          </td>
-        </tr>
+        <% @member.memberships.reverse.each do |membership| %>
+          <tr>
+            <td>
+              <strong><%= membership.year %></strong>
+              <em>(registered on <%= membership.created_at.strftime("%d-%m-%Y") %>)</em>
+              <%= link_to [@member, membership], method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
+                <i class="icon-trash"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <% unless @member.current? %>
+          <tr>
+            <td class="actions">
+              <%= member_actions @member %>
+            </td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>

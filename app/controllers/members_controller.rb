@@ -5,7 +5,7 @@ class MembersController < ApplicationController
   end
 
   def show
-    @member = Member.find(params[:id])
+    @member = Member.find_by(membership_number: params[:id])
   end
 
   def current
@@ -25,17 +25,17 @@ class MembersController < ApplicationController
   end
 
   def edit
-    @member = Member.find(params[:id])
+    @member = Member.find_by(membership_number: params[:id])
   end
 
   def complete
-    @member = Member.find(params[:id])
+    @member = Member.find_by(membership_number: params[:id])
     @member.complete
     redirect_to @member
   end
 
   def renew
-    @member = Member.find(params[:id])
+    @member = Member.find_by(membership_number: params[:id])
     @member.renew
     redirect_to @member
   end
@@ -62,7 +62,7 @@ class MembersController < ApplicationController
   end
 
   def update
-    @member = Member.find(params[:id])
+    @member = Member.find_by(membership_number: params[:id])
     if @member.update_attributes(params[:member])
       redirect_to @member, notice: 'Member was successfully updated.'
     else
@@ -71,7 +71,7 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    @member = Member.find(params[:id])
+    @member = Member.find_by(membership_number: params[:id])
     @member.destroy
     redirect_to members_url
   end

@@ -13,7 +13,10 @@ class Member
   field :address_three, type: String
   field :postcode, type: String
   field :email_allowed, type: Boolean, default: true
+
   embeds_many :memberships
+
+  index({ membership_number: 1 }, unique: true)
 
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :membership_number
@@ -62,6 +65,10 @@ class Member
 
   def has_membership_for?(year)
     memberships.any? { |m| m.year == year }
+  end
+
+  def to_param
+    membership_number
   end
 
   private
