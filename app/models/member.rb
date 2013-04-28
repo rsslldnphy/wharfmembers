@@ -71,7 +71,12 @@ class Member
   end
 
   def self.pending
-    self.or({ :memberships.exists => false}, {:memberships.with_size => 0})
+    self.or({:memberships.exists => false}, {:memberships.with_size => 0})
+  end
+
+  def self.expired
+    where(:"memberships.year".exists => true).
+      not.elem_match(memberships: { year: Date.today.year })
   end
 
 end

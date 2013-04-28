@@ -12,6 +12,10 @@ class MembersController < ApplicationController
     @members = Member.pending.page(params[:page]).per(10)
   end
 
+  def expired
+    @members = Member.expired.page(params[:page]).per(10)
+  end
+
   def new
     @member = Member.new
   end

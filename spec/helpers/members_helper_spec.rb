@@ -5,17 +5,17 @@ describe MembersHelper do
 
     it "displays if a member is pending" do
       member = stub(pending?: true)
-      helper.membership_status(member).should eq "<span class=\"pending-member\">Pending</span>"
+      helper.membership_status(member).should match /Pending/
     end
 
     it "displays if a member is current" do
       member = stub(pending?: false, current?: true)
-      helper.membership_status(member).should eq "<span class=\"current-member\">Current</span>"
+      helper.membership_status(member).should match /Current/
     end
 
     it "displays if a member is expired" do
       member = stub(pending?: false, current?: false)
-      helper.membership_status(member).should eq "<span class=\"expired-member\">Expired</span>"
+      helper.membership_status(member).should match /Expired/
     end
   end
 

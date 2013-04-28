@@ -1,8 +1,7 @@
 <tr>
-  <td><%= check_box_tag "ids[#{member.id}]", value: false %></td>
+  <td><%= check_box_tag "ids[#{member.id}]" %></td>
   <td><%= member.membership_number %></td>
   <td><%= member.full_name %></td>
-  <td><%= membership_status member %></td>
   <td><%= member.email %></td>
   <td><%= member.phone %></td>
   <td class="actions">
