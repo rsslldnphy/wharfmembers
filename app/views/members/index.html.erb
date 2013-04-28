@@ -25,13 +25,13 @@
     </thead>
     <tbody>
       <%= render @members %>
-      <tbody>
-      </table>
-      <div class="actions">
-        <%= submit_tag 'Delete Selected', name: 'delete-selected', class: 'btn btn-danger' %>
-        <%= submit_tag 'Renew Selected', name: 'renew-selected', class: 'btn btn-primary' %>
-      </div>
-    <% end %>
-    <div class="pull-right">
-      <%= paginate @members %>
-    </div>
+    </tbody>
+  </table>
+  <div class="actions">
+    <%= submit_tag 'Delete Selected', name: 'delete-selected', class: 'btn btn-danger' %>
+    <%= submit_tag 'Renew Selected', name: 'renew-selected', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<div class="pull-right">
+  <%= paginate @members %>
+</div>
