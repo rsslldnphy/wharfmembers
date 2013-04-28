@@ -70,6 +70,10 @@ class Member
     Date.today.year
   end
 
+  def self.current
+    elem_match(memberships: { year: Date.today.year })
+  end
+
   def self.pending
     self.or({:memberships.exists => false}, {:memberships.with_size => 0})
   end

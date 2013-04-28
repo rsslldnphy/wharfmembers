@@ -5,9 +5,10 @@ Wharfmembers::Application.routes.draw do
       get :complete
     end
     collection do
-      post :bulk_action
+      get :current
       get :pending
       get :expired
+      post :bulk_action
     end
     resources :memberships, only: :destroy
   end
