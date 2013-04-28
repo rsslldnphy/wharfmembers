@@ -8,6 +8,10 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
   end
 
+  def pending
+    @members = Member.pending.page(params[:page]).per(10)
+  end
+
   def new
     @member = Member.new
   end

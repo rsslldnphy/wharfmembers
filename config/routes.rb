@@ -4,6 +4,9 @@ Wharfmembers::Application.routes.draw do
       get :renew
       get :complete
     end
+    collection do
+      get :pending
+    end
     resources :memberships, only: :destroy
   end
 

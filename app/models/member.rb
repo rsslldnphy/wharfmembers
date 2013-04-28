@@ -70,4 +70,8 @@ class Member
     Date.today.year
   end
 
+  def self.pending
+    self.or({ :memberships.exists => false}, {:memberships.with_size => 0})
+  end
+
 end
