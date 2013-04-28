@@ -1,11 +1,9 @@
 <%= form_for(@member) do |f| %>
   <% if @member.errors.any? %>
-    <% @member.errors.full_messages.each do |msg| %>
-      <div class="alert alert-error">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <%= msg %>
-      </div>
-    <% end %>
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>There were some errors with the form:</strong> <%= @member.errors.full_messages.map(&:downcase).to_sentence %>.
+    </div>
   <% end %>
 
   <div class="row-fluid">
