@@ -90,4 +90,27 @@ class Member
       not.elem_match(memberships: { year: Date.today.year })
   end
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << csv_columns
+      all.each do |member|
+        csv << member.attributes.values_at(*csv_columns)
+      end
+    end
+  end
+
+  def self.csv_columns
+    [
+      :membership_number,
+      :first_name,
+      :last_name,
+      :email,
+      :phone,
+      :address_one,
+      :address_two,
+      :address_three,
+      :postcode
+    ].map(&:to_s)
+  end
+
 end

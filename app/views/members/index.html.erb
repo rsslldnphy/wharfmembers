@@ -1,4 +1,9 @@
-<h1>Members</h1>
+<h1>
+  Members
+  <%= link_to members_path(format: :csv) do %>
+    <i class="icon-download-alt"></i>
+  <% end %>
+</h1>
 
 <%= paginate @members %>
 <%= form_tag bulk_action_members_path do %>

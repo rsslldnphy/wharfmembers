@@ -2,6 +2,11 @@ class MembersController < ApplicationController
 
   def index
     @members = Member.search(params[:search]).page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.csv  { send_data Member.all.to_csv }
+    end
   end
 
   def show
@@ -10,14 +15,29 @@ class MembersController < ApplicationController
 
   def current
     @members = Member.current.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.csv  { send_data Member.current.to_csv }
+    end
   end
 
   def pending
     @members = Member.pending.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.csv  { send_data Member.pending.to_csv }
+    end
   end
 
   def expired
     @members = Member.expired.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.csv  { send_data Member.expired.to_csv }
+    end
   end
 
   def new
