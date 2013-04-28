@@ -93,7 +93,7 @@ class Member
   end
 
   def self.mailing_list
-    where(:email_allowed => true, :email.exists => true)
+    where(:email_allowed => true).and({:email.exists => true}, {:email.ne => ''})
   end
 
   def self.to_csv
