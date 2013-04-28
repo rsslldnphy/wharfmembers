@@ -18,6 +18,8 @@ class Member
 
   index({ membership_number: 1 }, unique: true)
 
+  default_scope order_by(last_name: :asc, first_name: :asc)
+
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :membership_number
 
