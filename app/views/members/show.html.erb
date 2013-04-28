@@ -62,4 +62,16 @@
       </tr>
     </table>
   </div>
+  <div class="span6">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr><th>Membership Status: <%= membership_status @member %></th></tr>
+      </thead>
+        <% @member.memberships.reverse.each do |membership| %>
+          <tr><td><%= membership.year %></td></tr>
+        <% end %>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
 </div>

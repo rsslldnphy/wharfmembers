@@ -1,3 +1,15 @@
 // Place all the styles related to the members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.expired-member {
+  color: red;
+}
+
+.current-member {
+  color: green;
+}
+
+.pending-member {
+  color: orange;
+}

@@ -12,6 +12,7 @@ class Member
   field :address_three, type: String
   field :postcode, type: String
   field :email_allowed, type: Boolean, default: true
+  embeds_many :memberships
 
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :membership_number
@@ -39,6 +40,14 @@ class Member
 
   def address
     [address_one, address_two, address_three, postcode].compact
+  end
+
+  def pending?
+    memberships.empty?
+  end
+
+  def current?
+    memberships.any? { |m| m.year == Date.today.year }
   end
 
 end

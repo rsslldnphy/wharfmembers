@@ -15,4 +15,27 @@ describe Member do
       'AB1 234'
     ]
   end
+
+  it 'is a current member if it has a membership for this year' do
+    year = Date.today.year
+    member = Member.new(memberships: [Membership.new(year: year)])
+    member.should be_current
+  end
+
+  it 'is not a current member if it does not have a membership for this year' do
+    year = 2012
+    member = Member.new(memberships: [Membership.new(year: year)])
+    member.should_not be_current
+  end
+
+  it 'is a pending member if it has no memberships' do
+    member = Member.new
+    member.should be_pending
+  end
+
+  it 'is not a pending member if it has memberships' do
+    member = Member.new(memberships: [Membership.new])
+    member.should_not be_pending
+  end
+
 end

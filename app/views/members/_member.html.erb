@@ -1,0 +1,17 @@
+<tr>
+  <td><%= member.membership_number %></td>
+  <td><%= member.full_name %></td>
+  <td><%= member.email %></td>
+  <td><%= member.phone %></td>
+  <td class="actions">
+    <%= link_to member do %>
+      <i class="icon-eye-open"></i>
+    <% end %>
+    <%= link_to edit_member_path(member) do %>
+      <i class="icon-pencil"></i>
+    <% end %>
+    <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <i class="icon-trash"></i>
+    <% end %>
+  </td>
+</tr>
