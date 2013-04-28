@@ -1,7 +1,7 @@
 <h1>Pending Registrations</h1>
 
 <%= paginate @members %>
-<%= form_tag complete_members_path do %>
+<%= form_tag bulk_action_members_path do %>
   <table class="table table-striped table-bordered">
 
     <col width="15px" />
@@ -25,9 +25,13 @@
     </thead>
     <tbody>
       <%= render @members %>
-      <tbody>
-      </table>
-    <% end %>
-    <div class="pull-right">
-      <%= paginate @members %>
-    </div>
+    </tbody>
+  </table>
+  <div class="actions">
+    <%= submit_tag 'Delete Selected', name: 'delete-selected', class: 'btn btn-danger' %>
+    <%= submit_tag 'Complete Registration', name: 'complete-registration', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+<div class="pull-right">
+  <%= paginate @members %>
+</div>

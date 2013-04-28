@@ -36,6 +36,18 @@ class MembersController < ApplicationController
     redirect_to @member
   end
 
+  def bulk_action
+    @members = Member.find(params[:ids])
+    if params['complete-registration'].present?
+      @members.each(&:complete)
+    elsif params['delete-selected'].present?
+      @members.each(&:destroy)
+    elsif params['renew-selected'].present?
+      @members.each(&:renew)
+    end
+    redirect_to :back
+  end
+
   def create
     @member = Member.new(params[:member])
     if @member.save

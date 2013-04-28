@@ -5,7 +5,7 @@ Wharfmembers::Application.routes.draw do
       get :complete
     end
     collection do
-      post :complete
+      post :bulk_action
       get :pending
       get :expired
     end
