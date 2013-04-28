@@ -1,4 +1,6 @@
 Wharfmembers::Application.routes.draw do
+  devise_for :users
+
   resources :members do
     member do
       get :renew
