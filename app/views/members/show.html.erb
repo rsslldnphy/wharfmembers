@@ -2,12 +2,17 @@
 <div class="row-fluid">
   <div class="span6">
     <table class="table table-bordered table-striped">
+      <col width="30%" />
+      <col width="70%" />
+      <col />
       <tr>
         <td>
           <strong>Membership No.</strong>
         </td>
         <td>
           <%= @member.membership_number %>
+        </td>
+        <td class="actions">
           <span class="pull-right">
             <%= link_to edit_member_path(@member) do %>
               <i class="icon-pencil"></i>
@@ -22,7 +27,7 @@
         <td>
           <strong>Name</strong>
         </td>
-        <td>
+        <td colspan=2>
           <%= @member.full_name %>
         </td>
       </tr>
@@ -30,7 +35,7 @@
         <td>
           <strong>Email</strong>
         </td>
-        <td>
+        <td colspan=2>
           <%= @member.email %>
         </td>
       </tr>
@@ -38,7 +43,7 @@
         <td>
           <strong>Phone</strong>
         </td>
-        <td>
+        <td colspan=2>
           <%= @member.phone %>
         </td>
       </tr>
@@ -46,7 +51,7 @@
         <td>
           <strong>Address</strong>
         </td>
-        <td>
+        <td colspan=2>
           <% @member.address.each do |line| %>
             <%= line %><br />
           <% end %>
@@ -56,8 +61,8 @@
         <td>
           <strong>Email allowed?</strong>
         </td>
-        <td>
-          <%= @member.email_allowed %>
+        <td colspan=2>
+          <%= @member.email_allowed ? "yes" : "no" %>
         </td>
       </tr>
     </table>

@@ -92,6 +92,10 @@ class Member
       not.elem_match(memberships: { year: Date.today.year })
   end
 
+  def self.mailing_list
+    where(:email_allowed => true, :email.exists => true)
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << csv_columns
