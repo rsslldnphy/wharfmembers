@@ -10,6 +10,8 @@ gem "mongoid", "~> 3.0.22"
 gem 'mongoid_search', "~> 0.3.1"
 gem 'kaminari', "~> 0.14.1"
 
+gem 'newrelic_rpm'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

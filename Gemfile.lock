@@ -76,6 +76,7 @@ GEM
       mongoid (>= 3.0.0)
     moped (1.4.5)
     multi_json (1.7.2)
+    newrelic_rpm (3.6.1.87)
     origin (1.1.0)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -152,6 +153,7 @@ DEPENDENCIES
   mongo (~> 1.8.2)
   mongoid (~> 3.0.22)
   mongoid_search (~> 0.3.1)
+  newrelic_rpm
   rails (~> 3.2.13)
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)
