@@ -1,7 +1,12 @@
 Wharfmembers::Application.routes.draw do
-  resources :members
+  resources :members do
+    member do
+      get :renew
+      get :complete
+    end
+    resources :memberships
+  end
 
 
-  resources :members
   root :to => 'members#index'
 end

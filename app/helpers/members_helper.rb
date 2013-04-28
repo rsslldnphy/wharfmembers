@@ -4,4 +4,7 @@ module MembersHelper
     MembershipStatus.new(self, member).render
   end
 
+  def member_actions(member)
+    MemberActions.new(self, member).render
+  end
 end

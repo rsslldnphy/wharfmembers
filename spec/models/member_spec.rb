@@ -38,4 +38,26 @@ describe Member do
     member.should_not be_pending
   end
 
+  describe "#complete" do
+    it 'creates a current membership' do
+      member = Member.create(first_name: "Daffy", last_name: "Duck")
+      member.complete
+      member.should_not be_pending
+      member.should be_current
+      member.memberships.first.year.should eq Date.today.year
+    end
+  end
+
+  describe "#renew" do
+    context 'when the member is current' do
+
+      it 'creates a new membership for next year' do
+        member = Member.create(first_name: "Daffy", last_name: "Duck")
+        member.complete
+        member.renew
+        member.should have_membership_for (Date.today.year + 1)
+      end
+    end
+
+  end
 end

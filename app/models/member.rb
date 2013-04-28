@@ -1,5 +1,6 @@
 class Member
   include Mongoid::Document
+  include Mongoid::Timestamps
   include Mongoid::Search
 
   field :membership_number, type: Integer
@@ -34,6 +35,15 @@ class Member
     full_text_search(text, allow_empty_search: allow_empty_search)
   end
 
+  def complete
+    memberships.create(year: current_year)
+  end
+
+  def renew
+    if current? then memberships.create(year: current_year + 1)
+    else memberships.create(year: current_year) end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -47,7 +57,17 @@ class Member
   end
 
   def current?
-    memberships.any? { |m| m.year == Date.today.year }
+    has_membership_for? current_year
+  end
+
+  def has_membership_for?(year)
+    memberships.any? { |m| m.year == year }
+  end
+
+  private
+
+  def current_year
+    Date.today.year
   end
 
 end
