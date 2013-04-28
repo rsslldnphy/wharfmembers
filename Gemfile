@@ -9,6 +9,7 @@ gem "bson_ext", "~> 1.8.2"
 gem "mongoid", "~> 3.0.22"
 gem 'mongoid_search', "~> 0.3.1"
 gem 'kaminari', "~> 0.14.1"
+gem 'devise', '~> 2.2.3'
 
 gem 'newrelic_rpm'
 

@@ -31,6 +31,15 @@ class MembersController < ApplicationController
     end
   end
 
+  def mailing_list
+    @members = Member.mailing_list.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.csv  { send_data Member.mailing_list.to_csv }
+    end
+  end
+
   def expired
     @members = Member.expired.page(params[:page]).per(10)
 

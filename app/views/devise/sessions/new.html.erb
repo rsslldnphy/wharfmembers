@@ -1,0 +1,32 @@
+<div id="login-alerts">
+  <% if notice.present? %>
+    <div class="container">
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= notice %>
+      </div>
+    </div>
+  <% end %>
+  <% if alert.present? %>
+    <div class="container">
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= alert %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div id="login">
+  <h1>Sign in</h1>
+
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <%= f.label :email %>
+    <%= f.email_field :email, :autofocus => true %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <%= f.submit "Sign in", class: 'btn pull-right' %>
+  <% end %>
+
+</div>

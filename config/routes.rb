@@ -1,4 +1,6 @@
 Wharfmembers::Application.routes.draw do
+  devise_for :users
+
   resources :members do
     member do
       get :renew
@@ -8,6 +10,7 @@ Wharfmembers::Application.routes.draw do
       get :current
       get :pending
       get :expired
+      get :mailing_list
       post :bulk_action
     end
     resources :memberships, only: :destroy

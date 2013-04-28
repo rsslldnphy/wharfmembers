@@ -26,7 +26,7 @@
           <% if user_signed_in? %>
             <div id="account" class="pull-right">
               <%= current_user.email %>
-              [ <%= link_to "log out", destroy_user_session_path, method: :delete %> ]
+              <%= link_to "[log out]", destroy_user_session_path, method: :delete %>
             </div>
           <% end %>
         </div>
@@ -60,9 +60,6 @@
                 <li>
                   <%= link_to "Expired", expired_members_path %>
                 </li>
-                <li>
-                  <%= link_to "Mailing List", mailing_list_members_path %>
-                </li>
               </ul>
             </li>
           </ul>
@@ -70,7 +67,6 @@
       </div>
     <% end %>
 
-    <% if user_signed_in? %>
     <% if notice.present? %>
       <div class="container">
         <div class="alert">
@@ -86,7 +82,6 @@
           <%= alert %>
         </div>
       </div>
-    <% end %>
     <% end %>
 
     <div id="main-content" class="container">

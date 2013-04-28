@@ -1,0 +1,41 @@
+<h1>
+  Mailing List
+  <%= link_to mailing_list_members_path(format: :csv) do %>
+    <i class="icon-download-alt"></i>
+  <% end %>
+</h1>
+
+<%= paginate @members %>
+<%= form_tag bulk_action_members_path do %>
+  <table class="table table-striped table-bordered">
+
+    <col />
+    <col width="10%" />
+    <col width="30%" />
+    <col />
+    <col width="30%" />
+    <col width="30%" />
+    <col />
+
+    <thead>
+      <tr>
+        <th></th>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @members %>
+    </tbody>
+  </table>
+  <div class="actions">
+    <%= submit_tag 'Delete Selected', name: 'delete-selected', class: 'btn btn-danger' %>
+  </div>
+<% end %>
+<div class="pull-right">
+  <%= paginate @members %>
+</div>
