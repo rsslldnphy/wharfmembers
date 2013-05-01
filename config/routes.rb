@@ -17,5 +17,5 @@ Wharfmembers::Application.routes.draw do
   end
 
 
-  root :to => 'members#index'
+  root :to => 'members#current'
 end

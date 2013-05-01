@@ -83,6 +83,7 @@ class MembersController < ApplicationController
 
   def create
     @member = Member.new(params[:member])
+    @member.register
     if @member.save
       redirect_to @member, notice: 'Member was successfully created.'
     else

@@ -14,7 +14,7 @@ class Member
   field :notes, type: String
   field :email_allowed, type: Boolean, default: true
 
-  embeds_many :memberships
+  embeds_many :memberships, cascade_callbacks: true
 
   index({ membership_number: 1 }, unique: true)
 
@@ -36,7 +36,7 @@ class Member
   }
 
   scope :expired, -> {
-    where.not.elem_match(memberships: { year: this_year })
+    where("memberships.year" => { "$ne" => this_year })
   }
 
   scope :mailing_list, -> {

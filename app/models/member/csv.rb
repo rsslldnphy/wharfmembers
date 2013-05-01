@@ -16,7 +16,6 @@ class Member
         :first_name,
         :last_name,
         :email,
-        :phone,
         :address_one,
         :address_two,
         :address_three,
