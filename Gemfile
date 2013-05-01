@@ -10,6 +10,7 @@ gem "mongoid", "~> 3.0.22"
 gem 'mongoid_search', "~> 0.3.1"
 gem 'kaminari', "~> 0.14.1"
 gem 'devise', '~> 2.2.3'
+gem 'optional'
 
 gem 'newrelic_rpm'
 
@@ -25,6 +26,7 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
+  gem "cucumber-rails", "~> 1.3.1", require: false
   gem "database_cleaner", "~> 0.9.1"
   gem "rspec-rails", "~> 2.0"
 end

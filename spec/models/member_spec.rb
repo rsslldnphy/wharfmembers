@@ -16,48 +16,30 @@ describe Member do
     ]
   end
 
-  it 'is a current member if it has a membership for this year' do
-    year = Date.today.year
-    member = Member.new(memberships: [Membership.new(year: year)])
-    member.should be_current
-  end
+  let (:member) { Member.new }
 
-  it 'is not a current member if it does not have a membership for this year' do
-    year = 2012
-    member = Member.new(memberships: [Membership.new(year: year)])
-    member.should_not be_current
-  end
-
-  it 'is a pending member if it has no memberships' do
-    member = Member.new
+  it 'starts off as a pending member' do
+    member.register
     member.should be_pending
   end
 
-  it 'is not a pending member if it has memberships' do
-    member = Member.new(memberships: [Membership.new])
+  it 'becomes a complete member after 48 hours' do
+    member.register
+    Time.stub(now: Time.now + 48.hours)
     member.should_not be_pending
+    member.should be_current
   end
 
-  describe "#complete" do
-    it 'creates a current membership' do
-      member = Member.create(first_name: "Daffy", last_name: "Duck")
-      member.complete
-      member.should_not be_pending
-      member.should be_current
-      member.memberships.first.year.should eq Date.today.year
-    end
+  it 'is a current member immediately once renewed' do
+    member.register
+    member.renew
+    member.should be_current
   end
 
-  describe "#renew" do
-    context 'when the member is current' do
-
-      it 'creates a new membership for next year' do
-        member = Member.create(first_name: "Daffy", last_name: "Duck")
-        member.complete
-        member.renew
-        member.should have_membership_for (Date.today.year + 1)
-      end
-    end
-
+  it 'becomes an expired member after the end of the calendar year' do
+    member.register
+    member.renew
+    Date.stub(today: Date.today + 1.year)
+    member.should be_expired
   end
 end
