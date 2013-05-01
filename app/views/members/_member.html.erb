@@ -1,9 +1,11 @@
 <tr>
   <td><%= check_box_tag "ids[]", member.id, false, id: dom_id(member), title: "Select #{member.full_name}" %></td>
-  <td><%= member.membership_number %></td>
+  <td><%= member.no %></td>
   <td><%= member.full_name %></td>
-  <td><%= membership_status member %></td>
   <td><%= member.email %></td>
+  <td><%= membership_status member %></td>
+  <td><%= member.notes %></td>
+  <td><%= member.created_at.strftime("%d/%m/%Y") %></td>
   <td class="actions">
     <%= link_to member do %>
       <i class="icon-eye-open"></i>

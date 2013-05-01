@@ -5,12 +5,13 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv  { send_data Member.all.to_csv }
+      format.csv   { send_data Member.all.to_csv }
+      format.text  { render text: Member.all.to_txt }
     end
   end
 
   def show
-    @member = Member.find_by(membership_number: params[:id])
+    @member = Member.find_by(no: params[:id])
   end
 
   def current
@@ -18,7 +19,8 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv  { send_data Member.current.to_csv }
+      format.csv   { send_data Member.current.to_csv }
+      format.text  { render text: Member.current.to_txt }
     end
   end
 
@@ -27,7 +29,8 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv  { send_data Member.pending.to_csv }
+      format.csv   { send_data Member.pending.to_csv }
+      format.text  { render text: Member.pending.to_txt }
     end
   end
 
@@ -36,7 +39,8 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv  { send_data Member.mailing_list.to_csv }
+      format.csv   { send_data Member.mailing_list.to_csv }
+      format.text  { render text: Member.mailing_list.to_txt }
     end
   end
 
@@ -45,7 +49,8 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv  { send_data Member.expired.to_csv }
+      format.csv   { send_data Member.expired.to_csv }
+      format.text  { render text: Member.expired.to_txt }
     end
   end
 
@@ -54,17 +59,11 @@ class MembersController < ApplicationController
   end
 
   def edit
-    @member = Member.find_by(membership_number: params[:id])
-  end
-
-  def complete
-    @member = Member.find_by(membership_number: params[:id])
-    @member.complete
-    redirect_to @member
+    @member = Member.find_by(no: params[:id])
   end
 
   def renew
-    @member = Member.find_by(membership_number: params[:id])
+    @member = Member.find_by(no: params[:id])
     @member.renew
     redirect_to @member
   end
@@ -92,7 +91,7 @@ class MembersController < ApplicationController
   end
 
   def update
-    @member = Member.find_by(membership_number: params[:id])
+    @member = Member.find_by(no: params[:id])
     if @member.update_attributes(params[:member])
       redirect_to @member, notice: 'Member was successfully updated.'
     else
@@ -101,7 +100,7 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    @member = Member.find_by(membership_number: params[:id])
+    @member = Member.find_by(no: params[:id])
     @member.destroy
     redirect_to members_url
   end

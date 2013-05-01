@@ -1,5 +1,8 @@
 <h1>
   Expired Members
+  <%= link_to expired_members_path(format: :text), target: '_blank' do %>
+    <i class="icon-print"></i>
+  <% end %>
   <%= link_to expired_members_path(format: :csv) do %>
     <i class="icon-download-alt"></i>
   <% end %>

@@ -15,19 +15,19 @@ class MembershipStatus
   private
 
   def pending
-    template.content_tag :span, class: "label label-warning" do
+    template.content_tag :span, class: "member-status label label-warning" do
       "Pending"
     end
   end
 
   def current
-    template.content_tag :span, class: 'label label-success' do
+    template.content_tag :span, class: 'member-status label label-success' do
       'Current'
     end
   end
 
   def expired
-    template.content_tag :span, class: 'label label-important' do
+    template.content_tag :span, class: 'member-status label label-important' do
       'Expired'
     end
   end

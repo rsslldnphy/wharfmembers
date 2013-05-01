@@ -13,25 +13,31 @@ When /^I register a new member$/ do
   click_on 'Create Member'
 end
 
-Then /^They appear on the pending registrations page/ do
+Then /^they appear on the pending registrations page/ do
   within "#menu-members" do
     click_on 'Pending'
   end
   page.should have_content 'Russell Dunphy'
 end
 
-But /^They do not appear on the current members page/ do
+But /^they do not appear on the current members page/ do
   within "#menu-members" do
     click_on 'Current'
   end
   page.should_not have_content 'Russell Dunphy'
 end
 
-And /^They do not appear on the mailing list page/ do
+And /^they do not appear on the mailing list page/ do
   within "#menu-members" do
     click_on 'Mailing List'
   end
   page.should_not have_content 'Russell Dunphy'
+end
+
+Given /^I have registered a member in the last 48 hours$/ do
+  @member = Member.new(first_name: 'Russell', last_name: 'Dunphy')
+  @member.register
+  @member.save
 end
 
 Given /^I registered a new member over 48 hours ago$/ do
@@ -41,28 +47,28 @@ Given /^I registered a new member over 48 hours ago$/ do
   @member.save
 end
 
-Then /^They appear on the current members page$/ do
+Then /^they appear on the current members page$/ do
   within "#menu-members" do
     click_on 'Current'
   end
   page.should have_content 'Russell Dunphy'
 end
 
-And /^They do not appear on the pending registrations page$/ do
+And /^they do not appear on the pending registrations page$/ do
   within "#menu-members" do
     click_on 'Pending'
   end
   page.should_not have_content 'Russell Dunphy'
 end
 
-And /^They do not appear on the expired members page$/ do
+And /^they do not appear on the expired members page$/ do
   within "#menu-members" do
     click_on 'Expired'
   end
   page.should_not have_content 'Russell Dunphy'
 end
 
-And /^They appear on the mailing list page$/ do
+And /^they appear on the mailing list page$/ do
   within "#menu-members" do
     click_on 'Mailing List'
   end
@@ -87,7 +93,14 @@ When /^I renew their membership$/ do
   click_on "Renew Selected"
 end
 
-Then /^They appear on the expired members page$/ do
+Given /^I have renewed a member's membership$/ do
+  steps %{
+    * I registered a member over a year ago
+    * I renew their membership
+  }
+end
+
+Then /^they appear on the expired members page$/ do
   within "#menu-members" do
     click_on 'Expired'
   end

@@ -15,7 +15,7 @@ class MemberActions
   private
 
   def pending
-    template.link_to "Complete Registration", template.complete_member_path(member), class: 'btn'
+    # no need for any actions
   end
 
   def current
