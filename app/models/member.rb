@@ -3,7 +3,7 @@ class Member
   include Mongoid::Timestamps
   include Mongoid::Search
 
-  field :membership_number, type: Integer
+  field :no, type: Integer
   field :first_name, type: String
   field :last_name, type: String
   field :email, type: String
@@ -14,15 +14,15 @@ class Member
   field :notes, type: String
   field :email_allowed, type: Boolean, default: true
 
-  embeds_many :memberships
+  embeds_many :memberships, cascade_callbacks: true
 
-  index({ membership_number: 1 }, unique: true)
+  index({ no: 1 }, unique: true)
 
   validates_presence_of :first_name, :last_name
-  validates_uniqueness_of :membership_number
+  validates_uniqueness_of :no
 
   before_create do
-    self.membership_number = Sequence.next("membership_number")
+    self.no = Sequence.next("membership_number")
   end
 
   default_scope order_by(last_name: :asc, first_name: :asc)
@@ -36,7 +36,7 @@ class Member
   }
 
   scope :expired, -> {
-    where.not.elem_match(memberships: { year: this_year })
+    where("memberships.year" => { "$ne" => this_year })
   }
 
   scope :mailing_list, -> {
@@ -85,15 +85,19 @@ class Member
   end
 
   def to_param
-    membership_number
+    no
   end
 
   def self.search(text, allow_empty_search=true)
     full_text_search(text, allow_empty_search: allow_empty_search)
   end
 
-  def to_csv
-    CSV.generate all
+  def self.to_csv
+    Member::Adapter::CSV.adapt all
+  end
+
+  def self.to_txt
+    Member::Adapter::TXT.adapt all
   end
 
   private

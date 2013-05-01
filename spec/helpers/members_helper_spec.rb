@@ -21,9 +21,9 @@ describe MembersHelper do
 
   describe "#member_actions" do
 
-    it "allows completion of pending members" do
+    it "has no actions if the member is pending" do
       member = stub(pending?: true)
-      helper.member_actions(member).should match /complete.*Complete Registration/
+      helper.member_actions(member).should be_nil
     end
 
     it "has no actions if the member is current" do
