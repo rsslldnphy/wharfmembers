@@ -14,8 +14,11 @@
       <%= f.text_field :last_name %>
       <%= f.label :email %>
       <%= f.text_field :email %>
-      <%= f.label :phone %>
-      <%= f.text_field :phone %>
+      <br />
+      <br />
+      <%= f.label :email_allowed, class: "checkbox" do %>
+        <%= f.check_box :email_allowed %> Email allowed?
+      <% end %>
     </div>
     <div class="span3">
       <%= f.label :address %>
@@ -24,10 +27,10 @@
       <%= f.text_field :address_three %>
       <%= f.label :postcode %>
       <%= f.text_field :postcode %>
-      <br />
-      <%= f.label :email_allowed, class: "checkbox" do %>
-        <%= f.check_box :email_allowed %> Email allowed?
-      <% end %>
+    </div>
+    <div class="span6">
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
     </div>
   </div>
   <div class="actions">
