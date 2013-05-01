@@ -26,6 +26,7 @@ end
 gem 'jquery-rails'
 
 group :test, :development do
+  gem "cucumber-rails", "~> 1.3.1", require: false
   gem "database_cleaner", "~> 0.9.1"
   gem "rspec-rails", "~> 2.0"
 end
