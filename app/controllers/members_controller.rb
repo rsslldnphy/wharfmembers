@@ -70,9 +70,7 @@ class MembersController < ApplicationController
 
   def bulk_action
     @members = Member.find(params[:ids])
-    if params['complete-registration'].present?
-      @members.each(&:complete)
-    elsif params['delete-selected'].present?
+    if params['delete-selected'].present?
       @members.each(&:destroy)
     elsif params['renew-selected'].present?
       @members.each(&:renew)
