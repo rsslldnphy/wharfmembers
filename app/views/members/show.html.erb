@@ -68,6 +68,11 @@
     </table>
   </div>
   <div class="span6">
+    <% if @member.notes.present? %>
+      <p class="notes">
+        <%= @member.notes %>
+      </p>
+    <% end %>
     <table class="table table-bordered table-striped">
       <thead>
         <tr><th>Membership Status: <%= membership_status @member %></th></tr>
