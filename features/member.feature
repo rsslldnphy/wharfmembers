@@ -36,7 +36,7 @@ Feature:
     Given   I registered a member over a year ago
     Then    they appear on the expired members page
     But     they do not appear on the mailing list page
-    And     they do not appear on the pending registrations page
+    And     they do not appear on the current members page
     And     they do not appear on the pending registrations page
 
   Scenario: Renewed members
