@@ -90,7 +90,7 @@ class Member
   end
 
   def self.search(text, allow_empty_search=true)
-    full_text_search(text, allow_empty_search: allow_empty_search)
+    full_text_search(text, match: :all, allow_empty_search: allow_empty_search)
   end
 
   def self.to_csv
