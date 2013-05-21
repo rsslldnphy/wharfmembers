@@ -1,5 +1,7 @@
 class MembersController < ApplicationController
 
+  skip_before_filter :authenticate_user!, only: :register
+
   def index
     @members = Member.search(params[:search]).page(params[:page]).per(10)
 
