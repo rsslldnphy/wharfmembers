@@ -17,6 +17,7 @@ class Member
   embeds_many :memberships, cascade_callbacks: true
 
   index({ no: 1 }, unique: true)
+  index({ "memberships.year" => 1, last_name: 1, first_name: 1 })
 
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :no
@@ -32,11 +33,11 @@ class Member
   }
 
   scope :pending, -> {
-    where(memberships: { "$exists" => false })
+    where("memberships.year" => { "$exists" => false })
   }
 
   scope :expired, -> {
-    where(memberships: { "$exists" => true }, "memberships.year" => { "$ne" => this_year })
+    where("memberships" => { "$exists" => true }, "memberships.year" => { "$ne" => this_year })
   }
 
   scope :mailing_list, -> {
