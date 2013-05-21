@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+  </head>
+  <body>
+    <%= form_for(@member) do |f| %>
+      <% if @member.errors.any? %>
+        <div class="row">
+          <div class="span6">
+            <div class="alert alert-error">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>There were some errors with the form:</strong> <%= @member.errors.full_messages.map(&:downcase).to_sentence %>.
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="row">
+        <div class="span3">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name %>
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name %>
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+          <br />
+          <br />
+          <%= f.label :email_allowed, class: "checkbox" do %>
+            <%= f.check_box :email_allowed %> Email allowed?
+          <% end %>
+        </div>
+        <div class="span3">
+          <%= f.label :address %>
+          <%= f.text_field :address_one %>
+          <%= f.text_field :address_two %>
+          <%= f.text_field :address_three %>
+          <%= f.label :postcode %>
+          <%= f.text_field :postcode %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="actions span6">
+          <%= f.submit "Register", class: "btn btn-primary", name: 'register' %>
+          <%= link_to "Cancel", '/', class: "btn" %>
+        </div>
+      </div>
+    <% end %>
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

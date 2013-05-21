@@ -11,12 +11,8 @@ class Membership
     "Year: #{year}\tRegistered on: #{created_at.strftime('%d-%m-%Y')}"
   end
 
-  def pending?
-    start > Time.now
-  end
-
   def current?
-    year == this_year && !pending?
+    year == this_year
   end
 
   def expired?
@@ -31,12 +27,8 @@ class Membership
     Date.today.year
   end
 
-  def self.registration
-    new year: Date.today.year, start: Time.now + 2.days
-  end
-
-  def self.renewal
-    new year: Date.today.year, start: Time.now
+  def self.register
+    new year: this_year, start: Time.now
   end
 
 end

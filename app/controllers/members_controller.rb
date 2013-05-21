@@ -58,6 +58,11 @@ class MembersController < ApplicationController
     @member = Member.new
   end
 
+  def register
+    @member = Member.new
+    render layout: false
+  end
+
   def edit
     @member = Member.find_by(no: params[:id])
   end
@@ -69,22 +74,33 @@ class MembersController < ApplicationController
   end
 
   def bulk_action
-    @members = Member.find(params[:ids])
-    if params['delete-selected'].present?
-      @members.each(&:destroy)
-    elsif params['renew-selected'].present?
-      @members.each(&:renew)
+    if params.fetch(:ids, []).any?
+      @members = Member.find(params[:ids])
+      if params['delete-selected'].present?
+        @members.each(&:destroy)
+      elsif params['complete-selected'].present?
+        @members.each(&:complete).each(&:save)
+      elsif params['renew-selected'].present?
+        @members.each(&:renew)
+      end
     end
     redirect_to :back
   end
 
   def create
     @member = Member.new(params[:member])
-    @member.register
     if @member.save
-      redirect_to @member, notice: 'Member was successfully created.'
+      if params[:register]
+        render text: "Thanks for registering, #{@member.full_name}"
+      else
+        redirect_to @member, notice: 'Member was successfully created.'
+      end
     else
-      render action: "new"
+      if params[:register]
+        render action: "register", layout: false
+      else
+        render action: "new"
+      end
     end
   end
 

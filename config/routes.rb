@@ -6,6 +6,7 @@ Wharfmembers::Application.routes.draw do
       get :renew
     end
     collection do
+      get :register
       get :current
       get :pending
       get :expired

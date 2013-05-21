@@ -32,11 +32,11 @@ class Member
   }
 
   scope :pending, -> {
-    elem_match(memberships: { year: this_year, start: { "$gt" => Time.now } })
+    where(memberships: { "$exists" => false })
   }
 
   scope :expired, -> {
-    where("memberships.year" => { "$ne" => this_year })
+    where(memberships: { "$exists" => true }, "memberships.year" => { "$ne" => this_year })
   }
 
   scope :mailing_list, -> {
@@ -60,12 +60,12 @@ class Member
     [address_one, address_two, address_three, postcode].compact
   end
 
-  def register
-    memberships << Membership.registration
+  def complete
+    memberships << Membership.register
   end
 
   def renew
-    memberships << Membership.renewal
+    memberships << Membership.register
   end
 
   def current?
@@ -73,7 +73,7 @@ class Member
   end
 
   def pending?
-    membership.map(&:pending?).value_or false
+    membership.none?
   end
 
   def expired?
@@ -81,7 +81,7 @@ class Member
   end
 
   def membership
-    memberships.last.nil? ? None : Some[memberships.last]
+    Option[memberships.last]
   end
 
   def to_param

@@ -34,17 +34,20 @@ And /^they do not appear on the mailing list page/ do
   page.should_not have_content 'Russell Dunphy'
 end
 
-Given /^I have registered a member in the last 48 hours$/ do
-  @member = Member.new(first_name: 'Russell', last_name: 'Dunphy')
-  @member.register
+Given(/^I have registered a new member$/) do
+  @member = Member.create(first_name: 'Russell', last_name: 'Dunphy')
+end
+
+When(/^I complete their registration$/) do
+  @member.complete
   @member.save
 end
 
-Given /^I registered a new member over 48 hours ago$/ do
-  @member = Member.new(first_name: 'Russell', last_name: 'Dunphy')
-  @member.register
-  @member.membership.value.start = Time.now
-  @member.save
+Given(/^I have registered and completed a new member$/) do
+  steps %{
+    * I have registered a new member
+    * I complete their registration
+  }
 end
 
 Then /^they appear on the current members page$/ do
@@ -77,7 +80,7 @@ end
 
 Given /^I registered a member over a year ago$/ do
   @member = Member.new(first_name: 'Russell', last_name: 'Dunphy')
-  @member.register
+  @member.complete
   @member.membership.each do |membership|
     membership.year  = membership.year - 1
     membership.start = membership.start - 1.year
