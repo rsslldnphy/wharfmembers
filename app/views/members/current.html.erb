@@ -1,5 +1,6 @@
 <h1>
   Current Members
+  <small>(<%= Member.current.count %>)</small>
   <%= link_to current_members_path(format: :text), target: '_blank' do %>
     <i class="icon-print"></i>
   <% end %>

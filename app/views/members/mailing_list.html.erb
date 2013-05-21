@@ -1,5 +1,6 @@
 <h1>
   Mailing List
+  <small>(<%= Member.mailing_list.count %>)</small>
   <%= link_to mailing_list_members_path(format: :text), target: '_blank' do %>
     <i class="icon-print"></i>
   <% end %>
