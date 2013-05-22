@@ -33,11 +33,11 @@ class Member
   }
 
   scope :pending, -> {
-    where("memberships.year" => { "$exists" => false })
+    where("memberships.year" => { "$exists" => false }).order_by(created_at: :asc)
   }
 
   scope :expired, -> {
-    where("memberships" => { "$exists" => true }, "memberships.year" => { "$ne" => this_year }).order_by(created_at: :asc)
+    where("memberships" => { "$exists" => true }, "memberships.year" => { "$ne" => this_year })
   }
 
   scope :mailing_list, -> {
