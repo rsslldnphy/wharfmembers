@@ -2,15 +2,51 @@ class MembersController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: :register
 
-  def index
-    @members = Member.search(params[:search]).page(params[:page]).per(10)
+  def context
+    self
+  end
 
-    respond_to do |format|
-      format.html
-      format.csv   { send_data Member.all.to_csv }
-      format.text  { render text: Member.all.to_txt }
+  def self.define(action)
+    define_method action do
+      action.to_s.camelcase.constantize.new(context).action
     end
   end
+
+  class Action < SimpleDelegator
+    def respond_to(*formats)
+      super() do |format|
+        formats.each { |f| format.send(f) { send f } }
+      end
+    end
+  end
+
+  class Index < Action
+
+    def action
+      respond_to :html, :csv, :text
+    end
+
+    def html
+      render locals: { members: members }
+    end
+
+    def csv
+      send_data Member.all.to_csv
+    end
+
+    def text
+      render text: Member.all.to_txt
+    end
+
+    private
+
+    def members
+      @members ||= Member.search(params[:search]).page(params[:page]).per(10)
+    end
+
+  end
+
+  define :index
 
   def show
     @member = Member.find_by(no: params[:id])
@@ -20,7 +56,7 @@ class MembersController < ApplicationController
     @members = Member.current.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html
+      format.html  { render locals: { members: @members } }
       format.csv   { send_data Member.current.to_csv }
       format.text  { render text: Member.current.to_txt }
     end
@@ -30,7 +66,7 @@ class MembersController < ApplicationController
     @members = Member.unscoped.pending.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html
+      format.html  { render locals: { members: @members } }
       format.csv   { send_data Member.pending.to_csv }
       format.text  { render text: Member.pending.to_txt }
     end
@@ -40,7 +76,7 @@ class MembersController < ApplicationController
     @members = Member.mailing_list.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html
+      format.html  { render locals: { members: @members } }
       format.csv   { send_data Member.mailing_list.to_csv }
       format.text  { render text: Member.mailing_list.to_txt }
     end
@@ -50,7 +86,7 @@ class MembersController < ApplicationController
     @members = Member.expired.page(params[:page]).per(10)
 
     respond_to do |format|
-      format.html
+      format.html  { render locals: { members: @members } }
       format.csv   { send_data Member.expired.to_csv }
       format.text  { render text: Member.expired.to_txt }
     end

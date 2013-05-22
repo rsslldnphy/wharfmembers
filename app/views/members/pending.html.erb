@@ -11,7 +11,7 @@
 
 <%= paginate @members %>
 <%= form_tag bulk_action_members_path do %>
-  <%= render 'table' %>
+  <%= render 'table', members: members %>
   <div class="actions">
     <%= submit_tag 'Complete Selected', name: 'complete-selected', class: 'btn btn-success' %>
     <%= submit_tag 'Delete Selected', name: 'delete-selected', class: 'btn btn-danger' %>
