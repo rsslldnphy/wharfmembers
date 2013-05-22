@@ -27,7 +27,7 @@ class MembersController < ApplicationController
   end
 
   def pending
-    @members = Member.pending.page(params[:page]).per(10)
+    @members = Member.unscoped.pending.page(params[:page]).per(10)
 
     respond_to do |format|
       format.html
