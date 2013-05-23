@@ -1,5 +1,6 @@
-PATH
-  remote: ~/Code/Gems/fendhal
+GIT
+  remote: git://github.com/rsslldnphy/fendhal.git
+  revision: 984af363813b41fd10b848f072e6fdd16a4dbe6c
   specs:
     fendhal (0.0.1)
       actionpack

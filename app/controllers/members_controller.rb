@@ -1,7 +1,7 @@
 class MembersController < ApplicationController
   extend Fendhal::Controller
 
-  skip_before_filter :authenticate_user!, only: :register
+  skip_before_filter :authenticate_user!, only: [:join, :register]
 
   defines :index, :current, :pending, :expired, :mailing_list
 
@@ -58,6 +58,8 @@ class MembersController < ApplicationController
       end
     end
   end
+  alias_method :join, :create
+
 
   def update
     @member = Member.find_by(no: params[:id])
