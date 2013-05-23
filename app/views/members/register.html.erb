@@ -5,7 +5,7 @@
   </head>
   <body>
     <div style="width: 500px">
-      <%= form_for(@member) do |f| %>
+      <%= form_for(@member, url: join_members_path) do |f| %>
         <% if @member.errors.any? %>
           <div class="alert alert-error">
             <button type="button" class="close" data-dismiss="alert">&times;</button>

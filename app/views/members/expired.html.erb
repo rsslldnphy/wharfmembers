@@ -9,10 +9,10 @@
   <% end %>
 </h1>
 
-<%= paginate @members %>
+<%= paginate members %>
 
 <%= form_tag bulk_action_members_path do %>
-  <%= render 'table' %>
+  <%= render 'table', members: members %>
   <div class="actions">
     <%= submit_tag 'Delete Selected', name: 'delete-selected', class: 'btn btn-danger' %>
     <%= submit_tag 'Renew Selected', name: 'renew-selected', class: 'btn btn-primary' %>
@@ -20,5 +20,5 @@
 <% end %>
 
 <div class="pull-right">
-  <%= paginate @members %>
+  <%= paginate members %>
 </div>

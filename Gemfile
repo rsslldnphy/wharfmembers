@@ -11,6 +11,7 @@ gem 'mongoid_search', "~> 0.3.1"
 gem 'kaminari', "~> 0.14.1"
 gem 'devise', '~> 2.2.3'
 gem 'optional'
+gem 'fendhal', github: 'rsslldnphy/fendhal'
 
 gem 'newrelic_rpm'
 

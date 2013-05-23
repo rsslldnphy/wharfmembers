@@ -7,6 +7,7 @@ Wharfmembers::Application.routes.draw do
     end
     collection do
       get :register
+      post :join
       get :current
       get :pending
       get :expired
