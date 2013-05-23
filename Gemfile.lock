@@ -1,3 +1,9 @@
+PATH
+  remote: ~/Code/Gems/fendhal
+  specs:
+    fendhal (0.0.1)
+      actionpack
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -180,6 +186,7 @@ DEPENDENCIES
   cucumber-rails (~> 1.3.1)
   database_cleaner (~> 0.9.1)
   devise (~> 2.2.3)
+  fendhal!
   jquery-rails
   kaminari (~> 0.14.1)
   mongo (~> 1.8.2)

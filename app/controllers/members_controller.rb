@@ -1,59 +1,12 @@
 class MembersController < ApplicationController
+  extend Fendhal::Controller
 
   skip_before_filter :authenticate_user!, only: :register
 
-  def index
-    @members = Member.search(params[:search]).page(params[:page]).per(10)
-
-    respond_to do |format|
-      format.html
-      format.csv   { send_data Member.all.to_csv }
-      format.text  { render text: Member.all.to_txt }
-    end
-  end
+  defines :index, :current, :pending, :expired, :mailing_list
 
   def show
     @member = Member.find_by(no: params[:id])
-  end
-
-  def current
-    @members = Member.current.page(params[:page]).per(10)
-
-    respond_to do |format|
-      format.html
-      format.csv   { send_data Member.current.to_csv }
-      format.text  { render text: Member.current.to_txt }
-    end
-  end
-
-  def pending
-    @members = Member.unscoped.pending.page(params[:page]).per(10)
-
-    respond_to do |format|
-      format.html
-      format.csv   { send_data Member.pending.to_csv }
-      format.text  { render text: Member.pending.to_txt }
-    end
-  end
-
-  def mailing_list
-    @members = Member.mailing_list.page(params[:page]).per(10)
-
-    respond_to do |format|
-      format.html
-      format.csv   { send_data Member.mailing_list.to_csv }
-      format.text  { render text: Member.mailing_list.to_txt }
-    end
-  end
-
-  def expired
-    @members = Member.expired.page(params[:page]).per(10)
-
-    respond_to do |format|
-      format.html
-      format.csv   { send_data Member.expired.to_csv }
-      format.text  { render text: Member.expired.to_txt }
-    end
   end
 
   def new
