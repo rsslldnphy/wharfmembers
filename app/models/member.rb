@@ -33,7 +33,7 @@ class Member
   }
 
   scope :pending, -> {
-    where("memberships.year" => { "$exists" => false }).order_by(created_at: :desc)
+    where("memberships.year" => { "$exists" => false }).order_by(created_at: :asc)
   }
 
   scope :expired, -> {
@@ -46,11 +46,7 @@ class Member
 
   search_in *[
     :first_name,
-    :last_name,
-    :address_one,
-    :address_two,
-    :address_three,
-    :post_code
+    :last_name
   ]
 
   def full_name
