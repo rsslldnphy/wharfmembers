@@ -3,7 +3,7 @@ class MembersController < ApplicationController
   class Pending < List
 
     def members
-      Member.pending
+      Member.unscoped.pending
     end
 
   end
