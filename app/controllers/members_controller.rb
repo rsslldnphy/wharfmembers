@@ -3,7 +3,13 @@ class MembersController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:join, :register]
 
-  defines :index,
+  defines :index,        ListAction, members: ->{ Member.all          }
+  defines :current,      ListAction, members: ->{ Member.current      }
+  defines :pending,      ListAction, members: ->{ Member.pending      }
+  defines :expired,      ListAction, members: ->{ Member.expired      }
+  defines :mailing_list, ListAction, members: ->{ Member.mailing_list }
+
+  defines List, index: { Member.all }
           :current,
           :pending,
           :expired,
