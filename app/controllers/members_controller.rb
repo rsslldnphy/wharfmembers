@@ -3,24 +3,15 @@ class MembersController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:join, :register]
 
-  defines :index, :current, :pending, :expired, :mailing_list
-
-  def show
-    @member = Member.find_by(no: params[:id])
-  end
-
-  def new
-    @member = Member.new
-  end
-
-  def register
-    @member = Member.new
-    render layout: false
-  end
-
-  def edit
-    @member = Member.find_by(no: params[:id])
-  end
+  defines :index,
+          :current,
+          :pending,
+          :expired,
+          :mailing_list,
+          :show,
+          :new,
+          :edit,
+          :register
 
   def renew
     @member = Member.find_by(no: params[:id])

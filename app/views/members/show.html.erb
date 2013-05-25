@@ -10,14 +10,14 @@
           <strong>Membership No.</strong>
         </td>
         <td>
-          <%= @member.no %>
+          <%= member.no %>
         </td>
         <td class="actions">
           <span class="pull-right">
-            <%= link_to edit_member_path(@member) do %>
+            <%= link_to edit_member_path(member) do %>
               <i class="icon-pencil"></i>
             <% end %>
-            <%= link_to @member, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class="icon-trash"></i>
             <% end %>
           </span>
@@ -28,7 +28,7 @@
           <strong>Name</strong>
         </td>
         <td colspan=2>
-          <%= @member.full_name %>
+          <%= member.full_name %>
         </td>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
           <strong>Email</strong>
         </td>
         <td colspan=2>
-          <%= @member.email %>
+          <%= member.email %>
         </td>
       </tr>
       <tr>
@@ -44,7 +44,7 @@
           <strong>Address</strong>
         </td>
         <td colspan=2>
-          <% @member.address.each do |line| %>
+          <% member.address.each do |line| %>
             <%= line %><br />
           <% end %>
         </td>
@@ -54,37 +54,37 @@
           <strong>Email allowed?</strong>
         </td>
         <td colspan=2>
-          <%= @member.email_allowed ? "yes" : "no" %>
+          <%= member.email_allowed ? "yes" : "no" %>
         </td>
       </tr>
     </table>
   </div>
   <div class="span6">
-    <% if @member.notes.present? %>
+    <% if member.notes.present? %>
       <p class="notes">
-        <%= @member.notes %>
+        <%= member.notes %>
       </p>
     <% end %>
     <table class="table table-bordered table-striped">
       <thead>
-        <tr><th>Membership Status: <%= membership_status @member %></th></tr>
+        <tr><th>Membership Status: <%= membership_status member %></th></tr>
       </thead>
       <tbody>
-        <% @member.memberships.reverse.each do |membership| %>
+        <% member.memberships.reverse.each do |membership| %>
           <tr>
             <td>
               <strong><%= membership.year %></strong>
               <em>(registered on <%= membership.created_at.strftime("%d-%m-%Y") %>)</em>
-              <%= link_to [@member, membership], method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
+              <%= link_to [member, membership], method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
                 <i class="icon-trash"></i>
               <% end %>
             </td>
           </tr>
         <% end %>
-        <% unless @member.current? %>
+        <% unless member.current? %>
           <tr>
             <td class="actions">
-              <%= member_actions @member %>
+              <%= member_actions member %>
             </td>
           </tr>
         <% end %>
