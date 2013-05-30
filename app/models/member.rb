@@ -1,7 +1,6 @@
 class Member
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Search
 
   field :no, type: Integer
   field :first_name, type: String
@@ -28,6 +27,17 @@ class Member
 
   default_scope order_by(last_name: :asc, first_name: :asc)
 
+  scope :search, ->(params) {
+    first, second = (params || "").split(" ")
+    if first && second
+      where(:first_name => /#{first}/i, :last_name => /#{second}/i)
+    elsif first
+      self.or({:first_name => /#{first}/i}, {:last_name => /#{first}/i})
+    else
+      all
+    end
+  }
+
   scope :current, -> {
     elem_match(memberships: { year: this_year, start: { "$lte" => Time.now } })
   }
@@ -43,11 +53,6 @@ class Member
   scope :mailing_list, -> {
     current.where(:email_allowed => true, :email.ne => '')
   }
-
-  search_in *[
-    :first_name,
-    :last_name
-  ]
 
   def full_name
    "#{first_name} #{last_name}"
@@ -83,10 +88,6 @@ class Member
 
   def to_param
     no
-  end
-
-  def self.search(text, allow_empty_search=true)
-    full_text_search(text, match: :all, allow_empty_search: allow_empty_search)
   end
 
   def self.to_csv
