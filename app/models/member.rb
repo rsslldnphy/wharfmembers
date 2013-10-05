@@ -54,6 +54,10 @@ class Member
     current.where(:email_allowed => true, :email.ne => '')
   }
 
+  scope :mailing_list_expired, -> {
+    expired.where(:email_allowed => true, :email.ne => '')
+  }
+
   def full_name
    "#{first_name} #{last_name}"
   end

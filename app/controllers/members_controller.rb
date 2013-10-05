@@ -3,7 +3,7 @@ class MembersController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: [:join, :register]
 
-  defines :index, :current, :pending, :expired, :mailing_list
+  defines :index, :current, :pending, :expired, :mailing_list, :mailing_list_expired
 
   def show
     @member = Member.find_by(no: params[:id])

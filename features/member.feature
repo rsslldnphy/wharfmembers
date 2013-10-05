@@ -36,9 +36,14 @@ Feature:
   Scenario: Expired members
     Given   I registered a member over a year ago
     Then    they appear on the expired members page
+    And     they appear on the expired members mailing list page
     But     they do not appear on the mailing list page
     And     they do not appear on the current members page
     And     they do not appear on the pending registrations page
+
+  Scenario: Expired members who we can't email
+    Given   I registered a no email allowed member over a year ago
+    Then    they do not appear on the expired members mailing list page
 
   Scenario: Renewed members
     Given   I have renewed a member's membership

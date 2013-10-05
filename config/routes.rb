@@ -12,6 +12,7 @@ Wharfmembers::Application.routes.draw do
       get :pending
       get :expired
       get :mailing_list
+      get :mailing_list_expired
       post :bulk_action
     end
     resources :memberships, only: :destroy

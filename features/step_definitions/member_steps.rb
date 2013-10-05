@@ -88,6 +88,16 @@ Given /^I registered a member over a year ago$/ do
   @member.save
 end
 
+Given /^I registered a no email allowed member over a year ago$/ do
+  @member = Member.new(first_name: 'Russell', last_name: 'Dunphy', email_allowed: false)
+  @member.complete
+  @member.membership.each do |membership|
+    membership.year  = membership.year - 1
+    membership.start = membership.start - 1.year
+  end
+  @member.save
+end
+
 When /^I renew their membership$/ do
   within "#menu-members" do
     click_on 'Expired'
@@ -108,4 +118,18 @@ Then /^they appear on the expired members page$/ do
     click_on 'Expired'
   end
   page.should have_content 'Russell Dunphy'
+end
+
+Then /^they appear on the expired members mailing list page$/ do
+  within "#menu-members" do
+    click_on 'Mailing List (Expired)'
+  end
+  page.should have_content 'Russell Dunphy'
+end
+
+Then /^they do not appear on the expired members mailing list page$/ do
+  within "#menu-members" do
+    click_on 'Mailing List (Expired)'
+  end
+  page.should_not have_content 'Russell Dunphy'
 end
