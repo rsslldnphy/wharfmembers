@@ -1,5 +1,9 @@
 Wharfmembers::Application.routes.draw do
   devise_for :users
+  devise_scope :user do
+    get '/users/edit', to: 'devise/registrations#edit', as: :edit_user_registration
+    put '/users',      to: 'devise/registrations#update'
+  end
 
   resources :members do
     member do
