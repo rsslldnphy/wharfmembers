@@ -109,7 +109,7 @@ class Member
   end
 
   def self.this_year
-    Date.today.year
+    Date.today.month < 5 ? Date.today.year - 1 : Date.today.year
   end
 
 end
