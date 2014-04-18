@@ -1,8 +1,9 @@
 Wharfmembers::Application.routes.draw do
-  devise_for :users
-  devise_scope :user do
-    get '/users/edit', to: 'devise/registrations#edit', as: :edit_user_registration
-    put '/users',      to: 'devise/registrations#update'
+  devise_for :users, skip: [:registrations]
+
+  as :user do
+    get '/users/edit/:id', to: 'devise/registrations#edit',   as: 'edit_user_registration'
+    put '/users/:id',      to: 'devise/registrations#update', as: 'user_registration'
   end
 
   resources :members do
