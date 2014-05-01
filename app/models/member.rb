@@ -12,6 +12,7 @@ class Member
   field :postcode, type: String
   field :notes, type: String
   field :email_allowed, type: Boolean, default: true
+  field :manually_updated, type: Boolean, default: false
 
   embeds_many :memberships, cascade_callbacks: true
 
@@ -75,7 +76,7 @@ class Member
   end
 
   def current?
-    membership.map(&:current?).value_or false
+    memberships.any?(&:current?)
   end
 
   def pending?
@@ -83,7 +84,7 @@ class Member
   end
 
   def expired?
-    membership.map(&:expired?).value_or false
+    memberships.none?(&:current?) && memberships.any?(&:expired?)
   end
 
   def membership
