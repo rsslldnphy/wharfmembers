@@ -6,6 +6,7 @@
   <td><%= membership_status member %></td>
   <td><%= member.notes %></td>
   <td><%= member.created_at.strftime("%d/%m/%Y") %></td>
+  <td class="tick"><%== member.lifetime_membership? ? "&#10004;" : "&#10007;" %></td>
   <td class="tick"><%== member.email_allowed? ? "&#10004;" : "&#10007;" %></td>
   <td class="actions">
     <%= link_to member do %>
