@@ -38,4 +38,11 @@ describe Member do
     Date.stub(today: Date.today + 1.year)
     member.should be_expired
   end
+
+  it 'should not expire if lifetime member' do
+    member.renew
+    member.lifetime_membership = true
+    Date.stub(today: Date.today + 15.year)
+    member.should be_current
+  end
 end
