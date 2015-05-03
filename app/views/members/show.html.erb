@@ -65,6 +65,10 @@
         <%= @member.notes %>
       </p>
     <% end %>
+    <table class="table table-bordered">
+      <th>Lifetime Membership:</th>
+      <td class=tick><%== @member.lifetime_membership? ? "&#10004;" : "&#10007;" %></td>
+    </table>
     <table class="table table-bordered table-striped">
       <thead>
         <tr><th>Membership Status: <%= membership_status @member %></th></tr>
