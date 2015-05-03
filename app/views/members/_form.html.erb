@@ -31,6 +31,9 @@
     <div class="span6">
       <%= f.label :notes %>
       <%= f.text_area :notes %>
+      <%= f.label :lifetime_membership, class: "checkbox" do %>
+        <%= f.check_box :lifetime_membership%> Lifetime Membership
+      <% end %>
     </div>
   </div>
   <div class="actions">
