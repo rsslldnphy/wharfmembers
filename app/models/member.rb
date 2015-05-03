@@ -13,6 +13,7 @@ class Member
   field :notes, type: String
   field :email_allowed, type: Boolean, default: true
   field :manually_updated, type: Boolean, default: false
+  field :lifetime_membership, type: Boolean, default: false
 
   embeds_many :memberships, cascade_callbacks: true
 
