@@ -77,7 +77,7 @@ class Member
   end
 
   def current?
-    memberships.any?(&:current?)
+    lifetime_membership || memberships.any?(&:current?)
   end
 
   def pending?
