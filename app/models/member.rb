@@ -85,7 +85,7 @@ class Member
   end
 
   def expired?
-    memberships.none?(&:current?) && memberships.any?(&:expired?)
+    !lifetime_membership && memberships.none?(&:current?) && memberships.any?(&:expired?)
   end
 
   def membership
