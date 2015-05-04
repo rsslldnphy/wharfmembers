@@ -12,7 +12,7 @@ class Membership
   end
 
   def current?
-    year == this_year
+    year >= this_year
   end
 
   def expired?
@@ -28,7 +28,7 @@ class Membership
   end
 
   def self.register
-    new year: this_year, start: Time.now
+    new year: Date.today.year, start: Time.now
   end
 
 end

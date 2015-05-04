@@ -41,7 +41,7 @@ class Member
   }
 
   scope :current, -> {
-    where("$or" => [ { "lifetime_membership" => true }, { "memberships.year" => this_year } ])
+    where("$or" => [ { "lifetime_membership" => true }, { "memberships.year" => { "$gte" =>  this_year } } ])
   }
 
   scope :pending, -> {
@@ -49,7 +49,7 @@ class Member
   }
 
   scope :expired, -> {
-    where("lifetime_membership" => false, "memberships.year" => { "$exists" => true, "$ne" => this_year })
+    where("lifetime_membership" => false, "memberships.year" => { "$exists" => true, "$not" => { "$gte" => this_year } } )
   }
 
   scope :mailing_list, -> {
