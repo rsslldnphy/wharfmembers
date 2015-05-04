@@ -20,23 +20,28 @@ describe Member do
 
   it 'starts off as a pending member' do
     member.should be_pending
+    member.should_not be_expired
+    member.should_not be_current
   end
 
   it 'can be completed' do
     member.complete
     member.should_not be_pending
     member.should be_current
+    member.should_not be_expired
   end
 
   it 'is a current member immediately once renewed' do
     member.renew
     member.should be_current
+    member.should_not be_expired
   end
 
   it 'becomes an expired member after the end of the calendar year' do
     member.renew
     Date.stub(today: Date.today + 1.year)
     member.should be_expired
+    member.should_not be_current
   end
 
   it 'should not expire if lifetime member' do
@@ -44,5 +49,6 @@ describe Member do
     member.lifetime_membership = true
     Date.stub(today: Date.today + 15.year)
     member.should be_current
+    member.should_not be_expired
   end
 end
