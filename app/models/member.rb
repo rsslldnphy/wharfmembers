@@ -13,6 +13,7 @@ class Member
   field :notes, type: String
   field :email_allowed, type: Boolean, default: true
   field :manually_updated, type: Boolean, default: false
+  field :lifetime_membership, type: Boolean, default: false
 
   embeds_many :memberships, cascade_callbacks: true
 
@@ -40,7 +41,7 @@ class Member
   }
 
   scope :current, -> {
-    elem_match(memberships: { year: this_year, start: { "$lte" => Time.now } })
+    where("$or" => [ { "lifetime_membership" => true }, { "memberships.year" => { "$gte" =>  this_year } } ])
   }
 
   scope :pending, -> {
@@ -48,7 +49,7 @@ class Member
   }
 
   scope :expired, -> {
-    where("memberships" => { "$exists" => true }, "memberships.year" => { "$ne" => this_year })
+    where("lifetime_membership" => false, "memberships.year" => { "$exists" => true, "$not" => { "$gte" => this_year } } )
   }
 
   scope :mailing_list, -> {
@@ -76,7 +77,7 @@ class Member
   end
 
   def current?
-    memberships.any?(&:current?)
+    lifetime_membership || memberships.any?(&:current?)
   end
 
   def pending?
@@ -84,7 +85,7 @@ class Member
   end
 
   def expired?
-    memberships.none?(&:current?) && memberships.any?(&:expired?)
+    !lifetime_membership && memberships.none?(&:current?) && memberships.any?(&:expired?)
   end
 
   def membership
