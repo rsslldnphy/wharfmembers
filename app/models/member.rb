@@ -5,6 +5,8 @@ class Member
   field :no, type: Integer
   field :first_name, type: String
   field :last_name, type: String
+  field :first_name_lowercase, type: String
+  field :last_name_lowercase, type: String
   field :email, type: String
   field :address_one, type: String
   field :address_two, type: String
@@ -18,23 +20,29 @@ class Member
   embeds_many :memberships, cascade_callbacks: true
 
   index({ no: 1 }, unique: true)
-  index({ "memberships.year" => 1, last_name: 1, first_name: 1 })
+  index({ "memberships.year" => 1, lifetime_membership: 1 })
+  index({ first_name_lowercase: 1, last_name_lowercase: 1 })
 
   validates_presence_of :first_name, :last_name
   validates_uniqueness_of :no
+
+  before_save do
+    self.first_name_lowercase = self.first_name.downcase
+    self.last_name_lowercase = self.last_name.downcase
+  end
 
   before_create do
     self.no = Sequence.next("membership_number")
   end
 
-  default_scope order_by(last_name: :asc, first_name: :asc)
+  default_scope order_by(last_name_lowercase: :asc, first_name_lowercase: :asc)
 
   scope :search, ->(params) {
     first, second = (params || "").split(" ")
     if first && second
-      where(:first_name => /#{first}/i, :last_name => /#{second}/i)
+      where(:first_name_lowercase => /#{first}/i, :last_name_lowercase => /#{second}/i)
     elsif first
-      self.or({:first_name => /#{first}/i}, {:last_name => /#{first}/i})
+      self.or({:first_name_lowercase => /#{first}/i}, {:last_name_lowercase => /#{first}/i})
     else
       all
     end
