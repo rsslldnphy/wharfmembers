@@ -60,6 +60,10 @@ class Member
     where("lifetime_membership" => false, "memberships.year" => { "$exists" => true, "$not" => { "$gte" => this_year } } )
   }
 
+  scope :lifetime, -> {
+    where('lifetime_membership' => true )
+  }
+
   scope :mailing_list, -> {
     current.where(:email_allowed => true, :email.ne => '')
   }

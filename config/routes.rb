@@ -16,6 +16,7 @@ Wharfmembers::Application.routes.draw do
       get :current
       get :pending
       get :expired
+      get :lifetime
       get :mailing_list
       get :mailing_list_expired
       post :bulk_action
