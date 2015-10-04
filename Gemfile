@@ -4,18 +4,18 @@ ruby '2.0.0'
 
 gem 'rails', '~> 4.0.0'
 
-gem "mongo"
-gem "bson_ext"
-gem "mongoid", '~> 4'
-gem 'kaminari'
-gem 'devise'
-gem 'optional'
+gem "mongo", "~> 2.1.1"
+gem "bson_ext", '~> 1.5.1'
+gem "mongoid", '~> 4.0.2'
+gem 'kaminari', '~> 0.16.3'
+gem 'devise', '~> 3.5.2'
+gem 'optional', '~> 0.0.7'
 gem 'fendhal', github: 'rsslldnphy/fendhal'
 
 gem 'newrelic_rpm'
 
-gem 'sass-rails'
-gem 'coffee-rails'
+gem 'sass-rails', '~> 5.0.4'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 2.2.2.0'
 gem 'uglifier', '>= 1.0.3'
 
@@ -27,4 +27,4 @@ group :test, :development do
   gem "rspec-rails", "~> 3.0"
 end
 
-gem 'unicorn'
+gem 'unicorn', '~> 4.9.0'

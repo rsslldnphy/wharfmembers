@@ -183,23 +183,20 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 2.2.2.0)
-  bson_ext
-  coffee-rails
+  bson_ext (~> 1.5.1)
+  coffee-rails (~> 4.1.0)
   cucumber-rails (~> 1.4.2)
   database_cleaner (~> 1.4.1)
-  devise
+  devise (~> 3.5.2)
   fendhal!
   jquery-rails
-  kaminari
-  mongo
-  mongoid (~> 4)
+  kaminari (~> 0.16.3)
+  mongo (~> 2.1.1)
+  mongoid (~> 4.0.2)
   newrelic_rpm
-  optional
+  optional (~> 0.0.7)
   rails (~> 4.0.0)
   rspec-rails (~> 3.0)
-  sass-rails
+  sass-rails (~> 5.0.4)
   uglifier (>= 1.0.3)
-  unicorn
-
-BUNDLED WITH
-   1.10.0.pre.2
+  unicorn (~> 4.9.0)
