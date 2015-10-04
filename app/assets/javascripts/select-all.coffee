@@ -7,10 +7,10 @@ $(document).ready ->
     $('#selectall').on 'click', ->
         if @checked
             $(':checkbox').each ->
-                @checked = true
+                $(@).prop('checked', true)
         else
             $(':checkbox').each ->
-                @checked = false
+                $(@).prop('checked', false)
 
     $(':checkbox').on 'click', ->
         if numberOfChecked() is totalNumberOfCheckboxes()
