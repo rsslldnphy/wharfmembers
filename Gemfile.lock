@@ -200,3 +200,6 @@ DEPENDENCIES
   sass-rails (~> 5.0.4)
   uglifier (>= 1.0.3)
   unicorn (~> 4.9.0)
+
+BUNDLED WITH
+   1.10.0.pre.2

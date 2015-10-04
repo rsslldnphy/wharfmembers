@@ -1,21 +1,21 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe MembersHelper do
   describe "#membership_status" do
 
     it "displays if a member is pending" do
       member = double(pending?: true)
-      helper.membership_status(member).should match /Pending/
+      expect(helper.membership_status(member)).to match /Pending/
     end
 
     it "displays if a member is current" do
       member = double(pending?: false, current?: true)
-      helper.membership_status(member).should match /Current/
+      expect(helper.membership_status(member)).to match /Current/
     end
 
     it "displays if a member is expired" do
       member = double(pending?: false, current?: false)
-      helper.membership_status(member).should match /Expired/
+      expect(helper.membership_status(member)).to match /Expired/
     end
   end
 
@@ -23,17 +23,17 @@ describe MembersHelper do
 
     it "has no actions if the member is pending" do
       member = double(pending?: true)
-      helper.member_actions(member).should be_nil
+      expect(helper.member_actions(member)).to be_nil
     end
 
     it "has no actions if the member is current" do
       member = double(pending?: false, current?: true)
-      helper.member_actions(member).should be_nil
+      expect(helper.member_actions(member)).to be_nil
     end
 
     it "allows renewal if the member is expired" do
       member = double(pending?: false, current?: false)
-      helper.member_actions(member).should match /renew.*Renew Membership/
+      expect(helper.member_actions(member)).to match /renew.*Renew Membership/
     end
   end
 end
