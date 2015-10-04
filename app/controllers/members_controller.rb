@@ -19,6 +19,7 @@ class MembersController < ApplicationController
   end
 
   def edit
+    puts "=== #{params[:id]}"
     @member = Member.find_by(no: params[:id])
   end
 

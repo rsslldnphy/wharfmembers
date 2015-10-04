@@ -1,6 +1,6 @@
 <%= form_for(@member) do |f| %>
   <% if @member.errors.any? %>
-    <div class="alert alert-error">
+    <div class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>There were some errors with the form:</strong> <%= @member.errors.full_messages.map(&:downcase).to_sentence %>.
     </div>

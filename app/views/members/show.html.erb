@@ -14,10 +14,10 @@
         </td>
         <td class="actions">
           <span class="pull-right">
-            <%= link_to edit_member_path(@member) do %>
+            <%= link_to edit_member_path(id: @member.no) do %>
               <i class="icon-pencil"></i>
             <% end %>
-            <%= link_to @member, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= link_to member_path(id: @member), method: :delete, data: { confirm: 'Are you sure?' } do %>
               <i class="icon-trash"></i>
             <% end %>
           </span>
@@ -79,7 +79,7 @@
             <td>
               <strong><%= membership.year %></strong>
               <em>(registered on <%= membership.created_at.strftime("%d-%m-%Y") %>)</em>
-              <%= link_to [@member, membership], method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
+              <%= link_to member_membership_path(member_id: @member.no, id: membership), method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
                 <i class="icon-trash"></i>
               <% end %>
             </td>

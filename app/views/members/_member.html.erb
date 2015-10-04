@@ -9,13 +9,13 @@
   <td class="tick"><%== member.lifetime_membership? ? "&#10004;" : "&#10007;" %></td>
   <td class="tick"><%== member.email_allowed? ? "&#10004;" : "&#10007;" %></td>
   <td class="actions">
-    <%= link_to member do %>
+    <%= link_to member_path(id: member.no) do %>
       <i class="icon-eye-open"></i>
     <% end %>
-    <%= link_to edit_member_path(member) do %>
+    <%= link_to edit_member_path(id: member.no) do %>
       <i class="icon-pencil"></i>
     <% end %>
-    <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <%= link_to member_path(id: member.no), method: :delete, data: { confirm: 'Are you sure?' } do %>
       <i class="icon-trash"></i>
     <% end %>
   </td>

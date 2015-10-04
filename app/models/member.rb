@@ -35,7 +35,7 @@ class Member
     self.no = Sequence.next("membership_number")
   end
 
-  default_scope order_by(last_name_lowercase: :asc, first_name_lowercase: :asc)
+  default_scope -> { order_by(last_name_lowercase: :asc, first_name_lowercase: :asc) }
 
   scope :search, ->(params) {
     first, second = (params || "").split(" ")
