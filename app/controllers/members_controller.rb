@@ -43,13 +43,26 @@ class MembersController < ApplicationController
     redirect_to :back
   end
 
+  def member_params
+    params.require(:member).permit(:first_name,
+                                   :last_name,
+                                   :email,
+                                   :email_allowed,
+                                   :address_one,
+                                   :address_two,
+                                   :address_three,
+                                   :postcode,
+                                   :notes,
+                                   :lifetime_membership)
+  end
+
   def create
-    @member = Member.new(params[:member])
+    @member = Member.new(member_params)
     if @member.save
       if params[:register]
         render text: "Thanks for registering, #{@member.full_name}"
       else
-        redirect_to @member, notice: 'Member was successfully created.'
+        redirect_to member_path(id: @member.no), notice: 'Member was successfully created.'
       end
     else
       if params[:register]
@@ -64,8 +77,8 @@ class MembersController < ApplicationController
 
   def update
     @member = Member.find_by(no: params[:id])
-    if @member.update_attributes(params[:member])
-      redirect_to @member, notice: 'Member was successfully updated.'
+    if @member.update_attributes(member_params)
+      redirect_to member_path(id: @member.no), notice: 'Member was successfully updated.'
     else
       render action: "edit"
     end
