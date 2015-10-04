@@ -79,7 +79,7 @@
             <td>
               <strong><%= membership.year %></strong>
               <em>(registered on <%= membership.created_at.strftime("%d-%m-%Y") %>)</em>
-              <%= link_to member_membership_path(member_id: @member.no, id: membership), method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
+              <%= link_to member_membership_path(member_id: @member, id: membership), method: :delete, data: { confirm: 'Delete membership. Are you sure?' } do %>
                 <i class="icon-trash"></i>
               <% end %>
             </td>
