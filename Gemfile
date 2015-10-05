@@ -28,3 +28,5 @@ group :test, :development do
 end
 
 gem 'unicorn', '~> 4.9.0'
+
+gem 'rails_12factor', group: :production
